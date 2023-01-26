@@ -11,15 +11,17 @@ import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/login";
 import { useSelector } from 'react-redux'
+import { Redirect } from "react-router-dom";
+import { useEffect } from "react";
 function App() {
-  const admin = useSelector(state => state.user.currentUser.isAdmin)
+  const admin = useSelector(state => state.user.currentUser?.isAdmin)
   return (
     <Router>
       <Switch>
         <Route path="/login">
           <Login />
         </Route>
-        {admin && (
+        {admin ? (
           <>
             <Topbar />
             <div className="container">
@@ -47,7 +49,7 @@ function App() {
               </Route>
             </div>
           </>
-        )}
+        ): <Redirect to="/login"/>}
       </Switch>
     </Router>
   );

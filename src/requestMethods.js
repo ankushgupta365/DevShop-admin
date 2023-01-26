@@ -1,11 +1,16 @@
 import axios from "axios";
-
+import {useSelector} from "react-redux"
 const BASE_URL = "https://devshop-api.onrender.com/api"
-const TOKEN = ()=>{
-    return (localStorage.getItem("persist:root").user && JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.accessToken)
+let TOKEN;
+const getToken = ()=>{
+    if(localStorage.getItem("persist:root")){
+        TOKEN = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser?.accestoken
 }
+}
+getToken()
 
-
+// const token2 = useSelector(state=>state.user.currentUser.accestoken)
+console.log(TOKEN)
 export const publicRequest = axios.create({
     baseURL: BASE_URL
 })
